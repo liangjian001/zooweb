@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.zooweb</groupId>
+		<artifactId>zooweb</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>zooweb-provider</artifactId>
+	<packaging>war</packaging>
+	<name>zooweb-provider</name>
+	<description>服务提供者</description>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<skip_maven_deploy>false</skip_maven_deploy>
+		<project.build.finalName>zoowebp</project.build.finalName>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
+	</properties>
+
+	<dependencies>
+		<!-- 引入business模块 -->
+		<dependency>
+			<groupId>com.zooweb</groupId>
+			<artifactId>zooweb-business</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+
+	<distributionManagement>
+		<repository>
+			<id>thirdparty</id>
+			<url>http://127.0.0.1:8081/nexus/content/repositories/thirdparty/</url>
+		</repository>
+	</distributionManagement>
+
+	<build>
+		<finalName>${project.build.finalName}</finalName>
+		<defaultGoal>compile</defaultGoal>
+		<plugins>
+			<!-- define the project compile level -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

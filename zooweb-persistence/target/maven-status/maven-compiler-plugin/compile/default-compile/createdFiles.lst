@@ -1,0 +1,8 @@
+com\zooweb\persistence\dao\user\SysUserInfoDao.class
+com\zooweb\persistence\common\ResolveMybatisXML.class
+com\zooweb\persistence\common\MybatisSqlSessionFactory.class
+com\zooweb\persistence\mapper\user\SysUserMapper.class
+com\zooweb\persistence\dao\user\SysUserDao.class
+com\zooweb\persistence\mapper\order\ClrCollectionMapper.class
+com\zooweb\persistence\common\DruidDSFactory.class
+com\zooweb\persistence\mapper\user\SysUserInfoMapper.class

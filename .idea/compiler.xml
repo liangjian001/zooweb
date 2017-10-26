@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="zooweb-api" />
+        <module name="zooweb-business" />
+        <module name="zooweb-consumer" />
+        <module name="zooweb-modle" />
+        <module name="zooweb-persistence" />
+        <module name="zooweb-provider" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="1.8">
+      <module name="zooweb" target="1.8" />
+      <module name="zooweb-api" target="1.8" />
+      <module name="zooweb-business" target="1.8" />
+      <module name="zooweb-consumer" target="1.8" />
+      <module name="zooweb-modle" target="1.8" />
+      <module name="zooweb-persistence" target="1.8" />
+      <module name="zooweb-provider" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_STRING" value="-encoding utf-8" />
+  </component>
+</project>

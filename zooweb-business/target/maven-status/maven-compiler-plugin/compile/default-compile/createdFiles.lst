@@ -1,0 +1,3 @@
+com\zooweb\business\service\user\SysUserService.class
+com\zooweb\business\serviceimpl\user\SysUserServiceImpl.class
+com\zooweb\business\rpcimpl\user\SysUserInfoServiceImpl.class

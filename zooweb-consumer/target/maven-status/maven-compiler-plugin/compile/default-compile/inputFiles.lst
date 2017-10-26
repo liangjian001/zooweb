@@ -1,0 +1,9 @@
+D:\workspace\zooweb\zooweb-consumer\src\main\java\com\zooweb\web\controller\user\UserController.java
+D:\workspace\zooweb\zooweb-consumer\src\main\java\com\zooweb\web\rabbitmq\MessageSender.java
+D:\workspace\zooweb\zooweb-consumer\src\main\java\com\zooweb\web\rabbitmq\MessageConsumer.java
+D:\workspace\zooweb\zooweb-consumer\src\main\java\com\zooweb\web\rabbitmq\CommonMessage.java
+D:\workspace\zooweb\zooweb-consumer\src\main\java\com\zooweb\web\rabbitmq\FastJsonMessageConverter.java
+D:\workspace\zooweb\zooweb-consumer\src\main\java\com\zooweb\web\rabbitmq\MessageHandler.java
+D:\workspace\zooweb\zooweb-consumer\src\main\java\com\zooweb\web\rabbitmq\MessageProducer.java
+D:\workspace\zooweb\zooweb-consumer\src\main\java\com\zooweb\web\rabbitmq\ShijjConsumer.java
+D:\workspace\zooweb\zooweb-consumer\src\main\java\com\zooweb\web\rabbitmq\ChrisConsumer.java
