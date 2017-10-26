@@ -1,2 +1,0 @@
-# zooweb
-zooweb test project
