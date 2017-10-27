@@ -1,9 +1,0 @@
-com\zooweb\web\controller\user\UserController.class
-com\zooweb\web\rabbitmq\ShijjConsumer.class
-com\zooweb\web\rabbitmq\MessageHandler.class
-com\zooweb\web\rabbitmq\FastJsonMessageConverter.class
-com\zooweb\web\rabbitmq\MessageSender.class
-com\zooweb\web\rabbitmq\CommonMessage.class
-com\zooweb\web\rabbitmq\ChrisConsumer.class
-com\zooweb\web\rabbitmq\MessageProducer.class
-com\zooweb\web\rabbitmq\MessageConsumer.class
