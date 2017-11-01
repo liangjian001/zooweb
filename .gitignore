@@ -1,8 +1,12 @@
-/.idea/
-/zooweb-api/target/
-/zooweb-business/target/
-/zooweb-consumer/target/
-/zooweb-modle/target/
-/zooweb-persistence/target/
-/zooweb-provider/target/
-/zooweb-provider/
+.idea
+.settings
+.classpath
+.project
+target
+*.class
+
+##Package Files##
+*.jar
+*.war
+*.ear
+/target

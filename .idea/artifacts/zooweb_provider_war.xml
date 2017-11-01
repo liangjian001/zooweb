@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="zooweb-provider:war">
-    <output-path>$PROJECT_DIR$/zooweb-provider/target</output-path>
-    <root id="archive" name="zoowebp.war">
-      <element id="artifact" artifact-name="zooweb-provider:war exploded" />
-    </root>
-  </artifact>
-</component>
