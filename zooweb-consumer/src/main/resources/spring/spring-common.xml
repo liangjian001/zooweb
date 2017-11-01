@@ -16,8 +16,6 @@
         http://www.springframework.org/schema/aop/spring-aop.xsd 
 		http://www.springframework.org/schema/tx
 		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
-		http://www.springframework.org/schema/aop   
-        http://www.springframework.org/schema/aop/spring-aop.xsd
         http://code.alibabatech.com/schema/dubbo
         http://code.alibabatech.com/schema/dubbo/dubbo.xsd
 		">
@@ -165,7 +163,7 @@
     <!-- 监控中心配置，protocol="registry"，表示从注册中心发现监控中心地址 
     <dubbo:monitor protocol="registry"/>--> 
     
-    <!-- 生成远程服务代理，可以和本地bean一样使用demoService -->    
-    <dubbo:reference id="myTestServiceUser" interface="com.zooweb.api.service.user.SysUserInfoService" /> 
+    <!-- 生成远程服务代理，可以和本地bean一样使用demoService check:启动时检查服务生产者是否存在，true则报错，false则忽略-->    
+    <dubbo:reference id="myTestServiceUser" interface="com.zooweb.api.service.user.SysUserInfoService" check="false"/> 
  	
 </beans>

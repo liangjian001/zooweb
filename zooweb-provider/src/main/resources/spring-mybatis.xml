@@ -23,10 +23,8 @@
 		<property name="username" value="${jdbc.username}" />
 		<property name="password" value="${jdbc.password}" />
 		<property name="driverClassName" value="${jdbc.driverClassName}"/>
-		<!--initialSize:初始化连接大小    -->
-		<property name="initialSize" value="0" />
-		<!--maxActive:连接池最大使用连接数量  -->
-		<property name="maxActive" value="20" />
+		<property name="initialSize" value="0" /><!-- initialSize:初始化连接大小-->
+		<property name="maxActive" value="20" /><!-- maxActive:连接池最大使用连接数量空-->
 		<!-- minIdle:连接池最小空闲 -->
 		<property name="minIdle" value="0" />
 		<!-- maxWait:获取连接最大等待时间 -->
@@ -104,7 +102,7 @@
     <!-- myBatis文件 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="druidDataSource"/>
-		<!-- <property name="mapperLocations" value="classpath*:mapper/*/*.xml" /> -->
+		<!--  <property name="mapperLocations" value="classpath*:mapper/*/*.xml" /> -->
 		<property name="mapperLocations">  
             <list>  
                 <value>classpath:com/mapping/*/*.xml</value>

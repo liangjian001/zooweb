@@ -1,1 +1,8 @@
 /.idea/
+/zooweb-api/target/
+/zooweb-business/target/
+/zooweb-consumer/target/
+/zooweb-modle/target/
+/zooweb-persistence/target/
+/zooweb-provider/target/
+/zooweb-provider/
