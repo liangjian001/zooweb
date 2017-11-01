@@ -4,6 +4,7 @@
 .project
 target
 *.class
+*.iml
 
 ##Package Files##
 *.jar
