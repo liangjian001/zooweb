@@ -8,23 +8,29 @@ import com.zooweb.modle.entities.user.SysUserExample;
 import com.zooweb.web.rabbitmq.CommonMessage;
 import com.zooweb.web.rabbitmq.MessageSender;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
-@RequestMapping(value="/user")
+@RestController
+@RequestMapping(value="/userRest")
 public class UserController {
 
 	@Autowired  
     private MessageSender messageSender;
     @Autowired
     private SysUserService sysUserService;
-    
+
+	/**
+	 * 方法名可以和请求方式名称一致，例如可以替换成gets
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value="/index")
-	public String index(){
+	@RequestMapping(value="/user/{userId}",method = RequestMethod.GET)
+	public String index(@PathVariable("userId") String userId){
+		System.out.println("get"+userId);
 		 //测试查询数据
 		SysUserExample example = new SysUserExample();
 		ResultInfo resultInfo = sysUserService.getUserListData(example);
@@ -36,8 +42,12 @@ public class UserController {
 		}
 		return "index";
 	}
-	
-	@RequestMapping(value="/getUserList")
+
+	/**
+	 * 方法名可以和请求方式名称一致，例如getUserList可以替换成get
+	 * @return
+	 */
+	@RequestMapping(value="/user",method=RequestMethod.GET)
 	public String getUserList(){
 		 System.out.println("查询用户数量......");
 		 CommonMessage message = new CommonMessage();
@@ -55,7 +65,7 @@ public class UserController {
 		return "user/user";
 	}
 	
-	@RequestMapping(value="/getUserInfo")
+	@RequestMapping(value="/user",method = RequestMethod.GET)
 	public String getUserInfo(){
 		System.out.println("查询指定用户的基本信息......");
 		 CommonMessage message = new CommonMessage();
@@ -71,8 +81,29 @@ public class UserController {
 		return "user/user";
 	}
 
-	@RequestMapping(value = "/deleteUserById")
-	public String deleteUserById(){
+	@RequestMapping(value="/user/{userId}",method = RequestMethod.GET)
+	public ResponseEntity<ResultInfo> getUserDetailInfo(@RequestParam("userId") String userId){
+		System.out.println(">>>开始获取ID为:"+userId+"的用户详细信息......");
+		SysUser entity = new SysUser();
+		ResultInfo resultInfo = sysUserService.getUserListByEntity(entity);
+		if (!resultInfo.getResultFlag()) {
+			System.out.println("User with id " + userId + " not found");
+			return new ResponseEntity<ResultInfo>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<ResultInfo>(resultInfo,HttpStatus.OK);
+	}
+
+	@RequestMapping(value="/user",method = RequestMethod.POST)
+	public String addUser(@RequestBody SysUser sysUser){
 		return "";
 	}
-}
+
+	@RequestMapping(value="/user",method = RequestMethod.PUT)
+	public String updateUser(){
+		return "";
+	}
+
+	@RequestMapping(value = "/user",method = RequestMethod.DELETE)
+	public String deleteUserById() {
+		return "";
+	}

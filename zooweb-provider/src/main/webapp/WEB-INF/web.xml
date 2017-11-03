@@ -22,7 +22,7 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
   </servlet>
   <servlet-mapping>
     <servlet-name>SpringMVC</servlet-name>
-    <url-pattern>*.shtml</url-pattern>
+    <url-pattern>/</url-pattern>
   </servlet-mapping>
   <listener>
     <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
