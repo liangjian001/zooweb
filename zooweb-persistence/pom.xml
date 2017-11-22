@@ -27,7 +27,7 @@
 	</dependencies>
 
 	<distributionManagement>
-		<pository>
+		<repository>
 			<id>thirdparty</id>
 			<url>http://127.0.0.1:8081/nexus/content/repositories/thirdparty/</url>
 		</repository>
