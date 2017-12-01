@@ -8,10 +8,16 @@ import com.zooweb.modle.entities.user.SysUserExample;
 import com.zooweb.web.rabbitmq.CommonMessage;
 import com.zooweb.web.rabbitmq.MessageSender;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -29,9 +35,8 @@ public class UserController {
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/user/{userId}", method = RequestMethod.GET)
-	public String index(@PathVariable("userId") String userId) {
-		System.out.println("get" + userId);
+	@RequestMapping(value = "/index", method = RequestMethod.GET)
+	public String index() {
 		//测试查询数据
 		SysUserExample example = new SysUserExample();
 		ResultInfo resultInfo = sysUserService.getUserListData(example);
@@ -46,14 +51,15 @@ public class UserController {
 
 	/**
 	 * 方法名可以和请求方式名称一致，例如getUserList可以替换成get
-	 *
+	 * 由于控制器类使用的是@RestController注解,其中含有@ResponseBody注解,结果index没有经过视图解析器解析，
+	 * 直接变成json字符串返回给浏览器了，可以改变返回类型为ModelAndView，直接返回视图
 	 * @return
 	 */
-	@RequestMapping(value = "/user", method = RequestMethod.GET)
-	public String getUserList() {
+	@RequestMapping(value = "/userList", method = RequestMethod.GET)
+	public ModelAndView getUserList() {
 		System.out.println("查询用户数量......");
 		CommonMessage message = new CommonMessage();
-		message.setComments("查询一下系统目前用户数量");
+		message.setComments("查询一下系统目前用户数量：");
 		message.setPrimaryKey("001");
 		message.setSource("1");
 		JSONObject obj = new JSONObject();
@@ -64,10 +70,12 @@ public class UserController {
 		message.setMessage(obj);
 		messageSender.setRoutingKey("message.tonson");
 		messageSender.sendDataToQueue(message);
-		return "user/user";
+
+		ModelAndView view = new ModelAndView("user/user");
+		return view;
 	}
 
-	@RequestMapping(value = "/user", method = RequestMethod.GET)
+	@RequestMapping(value = "/userInfoTest", method = RequestMethod.GET)
 	public String getUserInfo() {
 		System.out.println("查询指定用户的基本信息......");
 		CommonMessage message = new CommonMessage();
@@ -83,8 +91,8 @@ public class UserController {
 		return "user/user";
 	}
 
-	@RequestMapping(value = "/user/{userId}", method = RequestMethod.GET)
-	public ResponseEntity<ResultInfo> getUserDetailInfo(@RequestParam("userId") String userId) {
+	@RequestMapping(value = "/userInfo/{userId}", method = RequestMethod.GET,produces = {"application/json;charset=utf-8"})
+	public ResponseEntity<ResultInfo> getUserDetailInfo(@PathVariable("userId") String userId) {
 		System.out.println(">>>开始获取ID为:" + userId + "的用户详细信息......");
 		SysUser entity = new SysUser();
 		ResultInfo resultInfo = sysUserService.getUserListByEntity(entity);
@@ -108,5 +116,10 @@ public class UserController {
 	@RequestMapping(value = "/user", method = RequestMethod.DELETE)
 	public String deleteUserById() {
 		return "";
+	}
+
+	@InitBinder
+	public void initBinder(WebDataBinder binder){
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), false));
 	}
 }

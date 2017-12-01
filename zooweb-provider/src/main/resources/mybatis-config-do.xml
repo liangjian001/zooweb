@@ -12,7 +12,7 @@
 	<environments default="druid-dev">
 		<environment id="druid-dev">
 			<transactionManager type="JDBC" />
-			<dataSource type="org.zooweb.persistence.common.DruidDSFactory">
+			<dataSource type="com.zooweb.persistence.common.DruidDSFactory">
 				<!-- 测试库 -->
 				<property name="driver" value="oracle.jdbc.driver.OracleDriver" />
 				<property name="url" value="jdbc:oracle:thin:@10.1.19.67:1521/NCSTEST" />
@@ -49,7 +49,7 @@
 		
 		<environment id="dsistest">
 			<transactionManager type="JDBC" />
-			<dataSource type="org.zooweb.persistence.common.DruidDSFactory">
+			<dataSource type="com.zooweb.persistence.common.DruidDSFactory">
 				<property name="driver" value="oracle.jdbc.driver.OracleDriver" />
 				<property name="url" value="jdbc:oracle:thin:@10.1.19.210/dsistest" />
 				<property name="username" value="DSISTEST_DSN" />
