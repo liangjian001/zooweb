@@ -10,7 +10,6 @@ import com.zooweb.web.rabbitmq.MessageSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +25,7 @@ public class UserController {
 
 	@Autowired
 	private MessageSender messageSender;
+
 	@Autowired
 	private SysUserService sysUserService;
 
@@ -91,6 +91,9 @@ public class UserController {
 		return "user/user";
 	}
 
+	//itemsView/{id}里边的{id}表示占位符，通过@PathVariable获取占位符中的参数，
+	//@PathVariable中名称要和占位符一致，形参名无需和其一致
+	//如果占位符中的名称和形参名一致，在@PathVariable可以不指定名称
 	@RequestMapping(value = "/userInfo/{userId}", method = RequestMethod.GET,produces = {"application/json;charset=utf-8"})
 	public ResponseEntity<ResultInfo> getUserDetailInfo(@PathVariable("userId") String userId) {
 		System.out.println(">>>开始获取ID为:" + userId + "的用户详细信息......");
@@ -104,8 +107,23 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/user", method = RequestMethod.POST)
-	public String addUser(@RequestBody SysUser sysUser) {
-		return "";
+	public ResultInfo addUser(@RequestBody SysUser sysUser) {
+		ResultInfo resultInfo = new ResultInfo();
+		if (null == sysUser){
+			//return new ResponseEntity<ResultInfo>(HttpStatus.NOT_FOUND);
+			return resultInfo;
+	}
+		System.out.println(">>>开始保存用户名为:" + sysUser.getUserName() + "的用户详细信息......");
+		if (null == sysUser.getId() || "".equals(sysUser.getId())){
+			resultInfo.setResultFlag(false);
+			resultInfo.setResultText("用户ID标志不能为空...");
+			//return new ResponseEntity<ResultInfo>(resultInfo,HttpStatus.NOT_FOUND);
+			return resultInfo;
+		}
+		//sysUser.setId("qwehiuhcc=980879-97jm");
+		//resultInfo = sysUserService.insertUserInfo(sysUser);
+		//return new ResponseEntity<ResultInfo>(resultInfo, HttpStatus.OK);
+		return resultInfo;
 	}
 
 	@RequestMapping(value = "/user", method = RequestMethod.PUT)

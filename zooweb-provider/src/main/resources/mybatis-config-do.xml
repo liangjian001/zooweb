@@ -85,6 +85,6 @@
 	</environments>
 
 	<mappers>
-		<mapper resource="classpath:mapper/user/SysUserMapper.xml" />
+		<mapper resource="mapper/user/SysUserMapper.xml" />
 	</mappers>
 </configuration>

@@ -10,6 +10,7 @@
 <body>
 <h2>用户管理</h2>
 <h2><a href="<%=basePath %>user/index.shtml">返回首页</a></h2>
-<h2><a onclick="httpGet('1230021')">获取用户(REST)</a></h2>
+<h2><a href="#" onclick="httpGet('1230021')">获取用户(REST)</a></h2
+<h2><a href="#" onclick="httpPost()">添加用户(REST)</a></h2>
 </body>
 </html>

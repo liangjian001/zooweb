@@ -76,6 +76,6 @@ public class ResolveMybatisXML {
 	}
 
 	public static void main(String[] args) {
-		ResolveMybatisXML.getMyBatisXMLInfo("spring-mybatis.xml");
+		ResolveMybatisXML.getMyBatisXMLInfo("spring-mybatis-do.xml");
 	}
 }
