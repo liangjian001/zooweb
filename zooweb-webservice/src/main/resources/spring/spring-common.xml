@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	   xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+		">
+<!-- 提供方应用信息，用于计算依赖关系,这个和client没必要一致 -->
+<dubbo:application name="zooweb-webservice-provider" />
+
+<!-- 多注册中心配置 -->
+<!--使用multicast广播注册中心暴露服务地址
+<dubbo:registry address="multicast://10.1.39.60:2181" id="mt"/>-->
+
+<!-- zookeeper注册中心配置  本机 伪集群 测试 -->
+<dubbo:registry protocol="zookeeper" address="10.1.39.62:2181,10.1.39.62:2182,10.1.39.62:2183" id="zk"/>
+
+<!-- 用webservice协议在20882端口暴露服务 协议配置，用于配置提供服务的协议信息，协议由提供方指定，消费方被动接受。-->
+<dubbo:protocol name="webservice" port="20882" accepts="1000"/>
+
+<!-- 当ProtocolConfig和ServiceConfig某属性没有配置时,采用此缺省值
+为防止被大量连接撑挂，可在服务提供方限制大接收连接数，以实现服务提供方自我保护。
+<dubbo:provider timeout="30000" threadpool="fixed" threads="100" accepts="1000"/>-->
+
+<!-- 和本地bean一样实现服务 -->
+<bean id="myWebService" class="com.zooweb.business.wbeserviceimpl.OrderServiceImpl"/>
+
+<!-- 声明需要暴露的服务接口 -->
+<dubbo:service interface="com.zooweb.api.service.webservice.OrderService"
+			   ref="myWebService" retries="0" protocol="webservice" registry="zk" timeout="30000" />
+
+</beans>
+

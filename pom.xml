@@ -4,13 +4,13 @@
   <groupId>com.zooweb</groupId>
   <artifactId>zooweb</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <packaging>pom</packaging>
+  <packaging>pom</packaging><!-- pom表示这是一个被继承的模块 -->
   <name>zooweb</name>
   <description>zooweb parent project</description>
   
   <properties>
 	<skip_maven_deploy>false</skip_maven_deploy>
-	<project.build.finalName>zooweb-provider</project.build.finalName>
+	<project.build.finalName>zooweb</project.build.finalName>
 	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	<maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
 	<spring.version>4.2.5.RELEASE</spring.version>
@@ -32,6 +32,8 @@
     <module>zooweb-business</module>
     <module>zooweb-persistence</module>
     <module>zooweb-modle</module>
+    <module>zooweb-webservice</module>
+    <module>zooweb-job</module>
   </modules>
   
  <dependencies>

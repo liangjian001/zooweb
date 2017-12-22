@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+		">
+	<!-- Spring整合Quartz进行配置遵循下面的步骤： 
+		1：定义工作任务的Job 
+		2：定义触发器Trigger，并将触发器与工作任务绑定 
+		3：定义调度器，并将Trigger注册到Scheduler -->
+		
+	<!-- 要调用的工作类 -->
+	<bean id="orderQuartzJob" class="com.zooweb.job.order.OrderQuartzJob"></bean>
+	<bean id="userQuartzJob" class="com.zooweb.job.user.UserQuartzJob"></bean>
+	<!-- 可继续加新的任务 -->
+	<!-- 要调用的工作类结束 -->
+
+	<!-- 定义调用对象和调用对象的方法 -->
+	<bean id="orderTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- 调用的类 -->
+		<property name="targetObject">
+			<ref bean="orderQuartzJob" />
+		</property>
+		<!-- 调用类中的方法 -->
+		<property name="targetMethod">
+			<value>work</value>
+		</property>
+	</bean>
+
+	<bean id="userTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- 调用的类 -->
+		<property name="targetObject">
+			<ref bean="userQuartzJob" />
+		</property>
+		<!-- 调用类中的方法 -->
+		<property name="targetMethod">
+			<value>work</value>
+		</property>
+	</bean>
+	<!-- 可继续加新的 -->
+	<!-- 定义调用对象和调用对象的方法结束 -->
+
+	<!-- 定义触发时间 
+	说明：在quartz 1.8.6及以前版本的时候,调度触发器依赖的类是 org.springframework.scheduling.quartz.CronTriggerBean,
+	在2.x.x版本之后就改为了org.springframework.scheduling.quartz.CronTriggerFactoryBean
+	1.8.6之前用：org.springframework.scheduling.quartz.CronTriggerBean
+	2.x.xZ及以后用：org.springframework.scheduling.quartz.CronTriggerFactoryBean
+	如果不对应可能会报ClassNotFoundException异常.
+	-->
+	<bean id="orderTaskTirgger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="orderTask" />
+		</property>
+		<!-- cron表达式 此处定义为一直触发执行任务 -->
+		<property name="cronExpression">
+			<value>10,15,20,25,30,35,40,45,50,55 * * * * ?</value>
+		</property>
+	</bean>
+
+	<bean id="userTaskTirgger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="userTask" />
+		</property>
+		<!-- cron表达式 此处定义周一至周日的下午13:15触发: 0 15 13 ? * SUN-SAT -->
+		<property name="cronExpression">
+			<value>10,15,20,25,30,35,40,45,50,55 * * * * ?</value>
+		</property>
+	</bean>
+	<!-- 可继续加新的 -->
+	<!-- 定义触发时间结束 -->
+
+	<!-- 总管理类 如果将lazy-init='false'那么容器启动就会执行调度程序 -->
+	<bean id="startQuertz" lazy-init="false" autowire="no" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="orderTaskTirgger" />
+				<ref bean="userTaskTirgger" />
+				<!-- 可继续加新的 -->
+			</list>
+		</property>
+	</bean>
+	<!-- 总管理类结束 -->
+
+
+</beans>

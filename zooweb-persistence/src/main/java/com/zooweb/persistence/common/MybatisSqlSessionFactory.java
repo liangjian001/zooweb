@@ -19,10 +19,8 @@ public class MybatisSqlSessionFactory {
 		if (sqlSessionFactory == null) {
 			try {
 				String resource = "mybatis-config-do.xml";
-				InputStream inputStream = Resources
-						.getResourceAsStream(resource);
-				sqlSessionFactory = new SqlSessionFactoryBuilder()
-						.build(inputStream);
+				InputStream inputStream = Resources.getResourceAsStream(resource);
+				sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			} finally {
@@ -36,10 +34,8 @@ public class MybatisSqlSessionFactory {
 		if (sqlSessionFactoryDsis == null) {
 			try {
 				String resource = "mybatis-config-do.xml";
-				InputStream inputStream = Resources
-						.getResourceAsStream(resource);
-				sqlSessionFactoryDsis = new SqlSessionFactoryBuilder()
-						.build(inputStream,"dsistest");
+				InputStream inputStream = Resources.getResourceAsStream(resource);
+				sqlSessionFactoryDsis = new SqlSessionFactoryBuilder().build(inputStream,"dsistest");
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			} finally {
@@ -53,10 +49,8 @@ public class MybatisSqlSessionFactory {
 		if (sqlSessionFactory == null) {
 			try {
 				String resource = "mybatis-config-do.xml";
-				InputStream inputStream = Resources
-						.getResourceAsStream(resource);
-				sqlSessionFactory = new SqlSessionFactoryBuilder().build(
-						inputStream, env);
+				InputStream inputStream = Resources.getResourceAsStream(resource);
+				sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream, env);
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			} finally {

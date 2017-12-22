@@ -8,15 +8,15 @@
 		<artifactId>zooweb</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>zooweb-provider</artifactId>
+	<artifactId>zooweb-job</artifactId>
 	<packaging>war</packaging>
-	<name>zooweb-provider</name>
-	<description>服务提供者</description>
+	<name>zooweb-job</name>
+	<description>Quartz定时任务调度</description>
 	<url>http://maven.apache.org</url>
 
 	<properties>
 		<skip_maven_deploy>false</skip_maven_deploy>
-		<project.build.finalName>zoowebp</project.build.finalName>
+		<project.build.finalName>zooweb-job</project.build.finalName>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
 	</properties>
@@ -28,6 +28,18 @@
 			<artifactId>zooweb-business</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		<!-- quartz相关的jar -->
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz</artifactId>
+			<version>2.2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz-jobs</artifactId>
+			<version>2.2.1</version>
+		</dependency>
+
 	</dependencies>
 
 	<distributionManagement>
@@ -50,37 +62,6 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
-			<!-- mybatis-generator的插件
-			<plugin>
-				<groupId>org.mybatis.generator</groupId>
-				<artifactId>mybatis-generator-maven-plugin</artifactId>
-				<version>1.3.5</version>
-				<configuration>
-					<configurationFile>src/main/resources/generatorConfig.xml</configurationFile>
-					<verbose>true</verbose>
-					<overwrite>true</overwrite>
-				</configuration>
-				<executions>
-					<execution>
-						<id>Generate MyBatis Artifacts</id>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-					</execution>
-				</executions>
-				<dependencies>
-					<dependency>
-						<groupId>org.mybatis.generator</groupId>
-						<artifactId>mybatis-generator-core</artifactId>
-						<version>1.3.5</version>
-					</dependency>
-					<dependency>
-						<groupId>org.codehaus.plexus</groupId>
-						<artifactId>plexus-utils</artifactId>
-						<version>1.1</version>
-					</dependency>
-				</dependencies>
-			</plugin>-->
 		</plugins>
 	</build>
 </project>

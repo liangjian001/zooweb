@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+		">
+ 	<!-- dubbo服务配置 -->
+ 	<!-- 提供方应用信息，用于计算依赖关系,这个和client没必要一致 -->
+ 	<dubbo:application name="zooweb-webservice-provider" />
+ 	<!-- 使用multicast广播注册中心暴露服务地址 -->  
+    <!-- <dubbo:registry address="multicast://192.168.0.101:2181" /> -->
+ 	<!-- 使用zookeeper广播注册中心暴露服务地址 -->  
+    <!-- <dubbo:registry  protocol="zookeeper"  address="10.1.39.62:2181"/>-->
+    <!--和上面的配置是一样的效果  -->  
+    <!-- <dubbo:registry address="zookeeper://192.168.0.101:2181" />  -->
+    <!-- 注册中心配置  本机 伪集群 测试 -->
+    <dubbo:registry protocol="zookeeper" address="10.1.39.62:2181,10.1.39.62:2182,10.1.39.62:2183"  />
+ 	<!-- 用webservice协议在20882端口暴露服务 协议配置，用于配置提供服务的协议信息，协议由提供方指定，消费方被动接受。-->
+    <dubbo:protocol name="webservice" port="20882" server="servlet"/>
+    
+    <!-- 监控中心配置，protocol="registry"，表示从注册中心发现监控中心地址  
+    <dubbo:monitor protocol="registry"/>-->
+    <!-- 当ProtocolConfig和ServiceConfig某属性没有配置时,采用此缺省值
+    为防止被大量连接撑挂，可在服务提供方限制大接收连接数，以实现服务提供方自我保护。-->
+    <dubbo:provider timeout="30000" threadpool="fixed" threads="100" accepts="1000" />
+    
+    <!-- 声明需要暴露的服务接口 -->
+    <dubbo:service interface="com.zooweb.api.service.webservice.OrderService" ref="myWebService" retries="0"/>
+    <!-- 和本地bean一样实现服务 -->  
+    <bean id="myWebService" class="com.zooweb.business.wbeserviceimpl.OrderServiceImpl"/>
+ 	
+</beans>
+<!--
+Dubbo协议缺省每服务每提供者每消费者使用单一长连接，如果数据量较大，可以使用多个连接。
+<dubbo:protocol name="dubbo"connections="2"/>
+<dubbo:service connections=”0”>或<dubbo:reference connections=”0”>表示该服务使用JVM共享长连接。(缺省)
+<dubbo:service connections=”1”>或<dubbo:reference connections=”1”>表示该服务使用独立长连接。
+<dubbo:service connections=”2”>或<dubbo:reference connections=”2”>表示该服务使用独立两条长连接。
+-->
+
